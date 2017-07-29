@@ -1,0 +1,22 @@
+array_manipulation
+------------------
+various .js files performing array manipulation
+
+FirstWeeks
+----------
+Lots of stuff
+
+nodeServer
+----------
+ejs-demo - various templating stuff
+imdb project
+lesson - basic webserver setup
+webserver - more advanced setup and express
+
+sass
+----
+SASS preprocessor for .css
+
+SVG
+---
+Scaled Vector Graphics

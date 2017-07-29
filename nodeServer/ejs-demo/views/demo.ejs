@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+
+    <% for(let i = 0; i < people.length; i++){ %>
+        <h1> <%= people[i].name %> </h1>
+        <% 
+            var threshold = 70;
+            if(people[i].score > threshold){ %>
+            <h2>LEGEND</h2>
+
+        <% } else { %>
+            <h2> MEH N00B </h2>
+        <% }
+    } %>
+
+</body>
+</html>

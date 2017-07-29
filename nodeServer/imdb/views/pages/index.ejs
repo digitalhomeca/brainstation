@@ -1,0 +1,49 @@
+<html>
+    <head>
+        <title>Movies, Movies, Movies</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/styles.css">        
+    </head>
+
+    <body>
+    
+        <div class="container">
+            <%- include('form'); %>
+            
+        <div class="chartWrapper">
+            <%- include('chart',{movies: movie}); %>
+        </div>
+
+            <h2 class="text-center">Movie Listing</h2>
+
+            <% for(let i = 0; i < movie.length; i++){ %>
+            <a class="movie-link" href="/movie/<%= movie[i].id %>">
+                <div class="media movie-list-item">
+                    <div class="media-left">
+                        <div class="poster-container">
+                            <img class="media-object movie-poster" src = "<%= movie[i].poster %>" />
+                        </div>
+                    </div>
+                    <div class="media-body">
+                        <h4 class="media-heading">
+                            <%= movie[i].title %>
+                            <span class="badge"><%= movie[i].imdbRating %></span>
+                        </h4>
+
+                        <div>
+                            <%= movie[i].plot %>
+                        </div>
+                        <div class="released-date">
+                            Released: <%= movie[i].released %>
+                        </div>
+                    </div>
+                </div>
+                </a>
+            
+            <% 
+        } %>
+
+        </div>
+    </body>
+</html>
+

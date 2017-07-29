@@ -1,0 +1,12 @@
+svg {
+    position: absolute;
+    left: 0px;
+    z-index: -1;
+}
+
+h1 {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display: inline-block;
+    color: white;
+    font-size: 80px;
+}

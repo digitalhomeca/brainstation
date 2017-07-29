@@ -1,0 +1,91 @@
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.bundle.min.js" ></script>  
+    <div class="chart">
+        <!-- needs a canvas height and width only work if responsive set to false  -->
+        <canvas id="myChart" height="360" width="720"></canvas> <!-- Create the canvas. Height and width need responsive option set to false to work  -->
+    </div>
+
+<script>
+
+var fromServer = <%- JSON.stringify(movies) %>
+
+function getChartInfo(movies) { 
+    chartLabels = [];
+    chartData = [];
+
+    for (let i= 0; i < movies.length; i++) {
+        chartLabels.push(movies[i].title);
+        chartData.push(movies[i].metascore);  
+    }
+
+}
+
+var chartInfo = getChartInfo(fromServer);
+
+var ctx = document.getElementById("myChart");
+var myBarChart = new Chart(ctx, {
+    
+    type: 'horizontalBar',
+
+    data: { 
+        labels: chartLabels, // pass in array for labels for each type of data
+    
+        datasets: [{
+            label: '', 
+            data: chartData, // pass in array of data
+        
+        backgroundColor: [
+                'rgba(255, 99, 132, 0.6)',
+                'rgba(54, 162, 235, 0.6)',
+                'rgba(255, 206, 86, 0.6)',
+                'rgba(75, 192, 192, 0.6)',
+                'rgba(153, 102, 255, 0.6)',
+                'rgba(255, 159, 64, 0.6)',
+                'rgba(255, 99, 132, 0.6)',
+                'rgba(54, 162, 235, 0.6)',
+                'rgba(255, 206, 86, 0.6)',
+                'rgba(75, 192, 192, 0.6)',
+        ]
+        }]
+    },
+
+    options: {
+            scales: {
+                xAxes: [{
+                    ticks: {
+                        beginAtZero:true,
+                        max: 100
+                    }
+                }]
+
+            },
+
+            layout: {
+                padding: {
+                    left : 0,
+                    right: 10,
+                    top: 30,
+                    bottom:30
+
+                }
+
+            },
+
+            title: {
+                display: true,
+                text: "Movie Metascores",
+                fontSize: 20 
+            },
+
+            legend: {
+                display : false,
+                position: 'bottom'
+            },
+            responsive: true,
+            maintainAspectRatio: true
+
+        }
+    });
+
+
+</script> 
