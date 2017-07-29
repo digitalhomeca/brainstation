@@ -1,0 +1,47 @@
+AXIOS Demo
+==========
+in class intro to Axios and Promises
+Promise based HTTP client for the browser and node.js
+
+hotAPI
+======
+using Axios to consume endpoints. includes promises. demo from class
+
+react carousel
+==============
+
+the calvin and hobbes image carousel assignment
+
+react components
+================
+react to display image gallery with bootstrap css 
+
+react-friend
+============
+react demo by TA
+
+react-multiview
+===============
+assignment to move to do app into react app with local storage
+
+react-todo
+==========
+
+react todo assignment
+
+reactCustomAPI
+==============
+backend integration with React and Node using TODO app
+
+reactState/myapp
+================
+demo
+
+react_product/myapp
+===================
+demo
+
+SPA
+===
+
+Single page application demo in class with codealong
