@@ -5,7 +5,7 @@ class Tasks extends Component {
 		super();
 		this.state = {
 			status: "all",
-			tdNum: 4, 
+			tdNum: 5, 
 			newTask: '',
 			todos:[
 	            {text: 'learn angular', done: false, id: 1},
@@ -32,13 +32,15 @@ class Tasks extends Component {
 	onAdd(event) {
 		 event.preventDefault();
 		if (this.state.newTask !== "") {
-			let newArr = Array.from(this.state.todos);
-			let num = this.state.tdNum + 1; 
-			this.setState({tdNum: num});
-			newArr.push({text: this.state.newTask, done: false, id: this.state.tdNum});
-			this.setState({todos: newArr});
-			this.setState({newTask: ''});	
-			this.setLocalStorage();
+			 let newArr = this.state.todos;
+			 newArr.push({text: this.state.newTask, done: false, id: this.state.tdNum });
+			 this.setState({
+				 todos: newArr,
+				 status: "all",
+				 newTask: "",
+				 tdNum: this.state.tdNum + 1});
+				this.setLocalStorage();
+
 		} else {
 			alert("Nothing to add. Please enter some text.");
 		}
@@ -51,7 +53,7 @@ class Tasks extends Component {
 	}
 
 	onTaskComplete(event) {
-		let newArr = Array.from(this.state.todos);
+		let newArr = this.state.todos;
 		for (let i=0; i < newArr.length; i++) {
 			if (newArr[i].id === Number(event.target.value)) {
 				newArr[i].done = !newArr[i].done 
@@ -75,6 +77,7 @@ class Tasks extends Component {
 
 	}
 	setLocalStorage () {
+		console.log(this.state.todos);
 		localStorage.setItem("todos",JSON.stringify(this.state.todos));
 		localStorage.setItem("dropdown",this.state.status);
 	}

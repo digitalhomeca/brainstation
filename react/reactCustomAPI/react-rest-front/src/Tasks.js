@@ -5,16 +5,15 @@ class Tasks extends Component {
 	constructor(){
 		super();
 		this.state = {
-			status: "all",
-			tdNum: 4, 
-			newTask: '',
 			todos:[
 	            {text: 'learn angular', done: false, id: 1},
 	            {text: 'write the content for the next module', done: false, id: 2},
 	            {text: 'buy cheese', done: true, id: 3},
 	            {text: 'buy milk', done: true, id: 4}
-			]
-			
+			],
+			status: "all",
+			tdNum: 5, 
+			newTask: ''		
 		}
 		this.onInput = this.onInput.bind(this);
 		this.onAdd = this.onAdd.bind(this);
@@ -24,7 +23,7 @@ class Tasks extends Component {
 		// this.setLocalStorage = this.setLocalStorage.bind(this);
 		// this.getLocalStorage = this.getLocalStorage.bind(this);
 		this.setRemoteStorage = this.setRemoteStorage.bind(this);
-		this.getRemoteStorage = this.getRemoteStorage.bind(this);
+		// this.getRemoteStorage = this.getRemoteStorage.bind(this);
 		
 	}
 
@@ -35,13 +34,16 @@ class Tasks extends Component {
 	onAdd(event) {
 		 event.preventDefault();
 		if (this.state.newTask !== "") {
-			let newArr = Array.from(this.state.todos);
-			let num = this.state.tdNum + 1; 
-			this.setState({tdNum: num});
-			newArr.push({text: this.state.newTask, done: false, id: this.state.tdNum});
-			this.setState({todos: newArr});
-			this.setState({newTask: ''});	
+			 let newArr = this.state.todos;
+			 newArr.push({text: this.state.newTask, done: false, id: this.state.tdNum});
+			 this.setState({
+				 todos: newArr,
+				 status: "all",
+				 newTask: '',
+				 tdNum: this.state.tdNum + 1});
+				
 			// this.setLocalStorage();
+			console.log(this.state);
 			this.setRemoteStorage();
 		} else {
 			alert("Nothing to add. Please enter some text.");
@@ -49,13 +51,14 @@ class Tasks extends Component {
 	}
 
 	onStatusUpdate(event) {
+		// localStorage.setItem("dropdown",event.target.value);
 		this.setRemoteStorage();
 		this.setState({status: event.target.value})
 		
 	}
 
 	onTaskComplete(event) {
-		let newArr = Array.from(this.state.todos);
+		let newArr = this.state.todos;
 		for (let i=0; i < newArr.length; i++) {
 			if (newArr[i].id === Number(event.target.value)) {
 				newArr[i].done = !newArr[i].done 
@@ -72,10 +75,10 @@ class Tasks extends Component {
 			if (newArr[i].done === true) {
 				newArr.splice(i,1);
 				i--;
-				console.log(newArr);
 			};
 		}
 		this.setState({todos: newArr});
+
 		// this.setLocalStorage();
 		this.setRemoteStorage();
 
@@ -95,7 +98,6 @@ class Tasks extends Component {
 
 			promise.then((result) => {
 			console.log('success!');
-			console.log(result);
 			} );
 
 			promise.catch ((error) => {
@@ -104,20 +106,20 @@ class Tasks extends Component {
 			});
 	}
 
-	getRemoteStorage () {
-		 const promise = axios.get('http://localhost:8080/todo')
+// 	getRemoteStorage () {
+// 		 const promise = axios.get('http://localhost:8080/todo')
 
-			promise.then((result) => {
+// 			promise.then((result) => {
+// this.setState(JSON.stringify.result);
 
-			// this.setState({todos: ls});
-			console.log(result.data.state);
-			} );
+// 			console.log(result.data.state);
+// 			} );
 
-			promise.catch ((error) => {
-			console.log('ERROR :(');
-			console.log(error);
-			});
-	}
+// 			promise.catch ((error) => {
+// 			console.log('ERROR :(');
+// 			console.log(error);
+// 			});
+// 	}
 	
 	render(){
 		return(
@@ -139,28 +141,25 @@ class Tasks extends Component {
 }
 
 class AddToDo extends Component {
-	
+
 componentWillMount() {
-	 const promise = axios.get('http://localhost:8080/todo')
+	
+		 const promise = axios.get('http://localhost:8080/todo')
 
-		promise.then((result) => {
-			let stuff = JSON.stringify(result.data.state);
-		this.setState({stuff});
-		console.log(result.data.state);
-		} );
+			promise.then((result) => {
+			console.log(result.data.state);
+			this.setState({state: result.data.state});
 
-		promise.catch ((error) => {
-		console.log('ERROR :(');
-		console.log(error);
-		});
+			} );
+
+			promise.catch ((error) => {
+			console.log('ERROR :(');
+			console.log(error);
+			});
+}
 
 
-	// 	let ls = JSON.parse(localStorage.getItem("todos"));
-	// 	if ( ls !== null) {
-	// 		this.props.getLS(ls);
-	// }
-
- 	}	
+ 		
 	render () {
 	return (
 		<div>

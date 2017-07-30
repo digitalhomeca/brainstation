@@ -19,13 +19,14 @@ var tdlist = {};
 
 app.get('/todo', (req,res) => {
     console.log('get  happened');
-        console.log(tdlist);
+    console.log(tdlist);
     res.send(tdlist);
 });
 
 app.post('/todo', jsonParser, (req, res) => {
     tdlist = req.body;
-
-    res.send('thnk-you');
+    console.log('Post occurred');
+    console.log(tdlist);
+    res.send('POST HAPPENED');
 });
 
