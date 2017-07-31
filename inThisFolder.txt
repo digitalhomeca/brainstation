@@ -2,6 +2,10 @@ array_manipulation
 ------------------
 various .js files performing array manipulation
 
+audio_app
+---------
+Week seven app of music player
+
 FirstWeeks
 ----------
 Lots of stuff
