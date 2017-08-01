@@ -5,6 +5,11 @@ class SongDetails extends Component {
         console.log(this.props)
         return (
             <div>
+                <h1>Song Title</h1>
+                <p>Song Description</p>
+                <audio controls>
+                    <source src="song file" type="audio/mpeg"/>
+                </audio>
             </div>
         )
     }
