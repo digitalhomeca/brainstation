@@ -12,26 +12,24 @@ class App extends Component {
   render() {
     const songs = this.props.route.songs
     console.log(songs);
-      let songList = songs.map((song,i) => {
-        return (
-                <SongsList  
-                    key={i}
-                    source={song.source}
-                    title={song.title}
-                    description={song.description}
-                    id={song.id} />
-       );
-       })
+
     return (
       <div className="App">
-        <h1>Song List</h1>
-        {songList}
-        {React.cloneElement(this.props.children, { findMeInConsole: 'You found me!'})}
+        <Header />
+         {React.cloneElement(this.props.children, { findMeInConsole: 'You found me!'})}  
       </div>
     );
   }
 }
 
-
+function Header (props) {
+  return (
+      <div className="panel panel-primary">      
+          <div className="panel-heading">
+              <h1>Song List</h1>
+          </div>  
+      </div>
+);
+}
 
 export default App;
