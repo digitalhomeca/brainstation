@@ -9,7 +9,7 @@ class SongsList extends Component {
             <div>
                 <p>{this.props.title}</p>
                  <audio controls>
-                    <source src={this.props.source} type="audio/ogg"/>
+                    <source src={this.props.source} type="audio/mpeg"/>
                 </audio><br />
 
             </div>
