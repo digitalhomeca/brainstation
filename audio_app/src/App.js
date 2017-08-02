@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
+import Header from './components/Header';
 import SongsList from './components/SongsList';
+import Footer from './components/Footer';
 
 class App extends Component {
   constructor () {
@@ -18,21 +20,12 @@ class App extends Component {
         <Header /> 
          <SongsList 
             songs={songs} />      
-                {this.props.children}        
-              {/* {React.cloneElement(this.props.children, { onClick: song here})}            */}
+                 {this.props.children}         
+               {/* {React.cloneElement(this.props.children, { onClick: songhere})}             */}
+        <Footer />
       </div>
     );
   }
-}
-
-function Header () {
-  return (
-      <div className="panel panel-primary">      
-          <div className="panel-heading">
-              <h1>Rock On!</h1>
-          </div>  
-      </div>
-);
 }
 
 export default App;
