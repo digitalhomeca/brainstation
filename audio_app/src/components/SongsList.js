@@ -3,8 +3,8 @@ import {Link} from 'react-router';
 
 class SongsList extends Component {
     render() {
-     console.log("SL this.props", this.props);
-      console.log("SL this.props.songs", this.props.songs);
+      console.log("SL this.props", this.props.songs);
+      console.log("SL2 this.props.songs", this.props.songs);
         let slist = this.props.songs.map((song, i) => {
         return (
                 <Song  
@@ -16,13 +16,8 @@ class SongsList extends Component {
        )
        })
        return (
-           <div>
-            {/* <div className="container-fluid"> */}
              <div className="well"> 
-
                 {slist}    
-            </div>
-
             </div>
        );
     
@@ -32,24 +27,14 @@ class SongsList extends Component {
 class Song extends Component {
     render () {
         return (
-
-                // <div className="row">
-                //     <span>
-                //     <div className="col-lg-4"><Link to={`/songs/${this.props.id}`}> {this.props.title} </Link></div> 
-                //     <div className="col-lg-8"><button className="btn btn-primary btn-small">Play</button></div>
-                //     </span>
-                // </div>
-
-
-            <div>
                  <div className="media-body">
-                    <h3 className="media-heading"><Link to={`/songs/${this.props.id}`}> {this.props.title} </Link> 
-                    <button type="button" className="btn btn-primary"><span className="glyphicon glyphicon-play glyphicon-align-left"></span></button>
-                        
+                    <h3 className="media-heading">
+                        <Link to={`/songs/${this.props.id}`}> {this.props.title} </Link> 
+                         <button type="button" className="btn btn-primary"><span className="glyphicon glyphicon-play glyphicon-align-left"></span></button>     
+                         {/* onClick={event =>this.setState({songSelected:this.props.source})}    */}
                     </h3>
                 </div> 
-    
-            </div>
+
         )
     }
 }

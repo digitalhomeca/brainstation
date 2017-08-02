@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Header from './components/Header';
 import SongsList from './components/SongsList';
+import SongDetails from './components/SongDetails';
 import Footer from './components/Footer';
 
 class App extends Component {
@@ -13,16 +14,16 @@ class App extends Component {
 
   render() {
     const songs = this.props.route.songs
-    // console.log(songs);
+    console.log('app songs',songs);
 
     return (
       <div className="App">
         <Header /> 
-         <SongsList 
-            songs={songs} />      
-                 {this.props.children}         
-               {/* {React.cloneElement(this.props.children, { onClick: songhere})}             */}
-        <Footer />
+        <SongsList 
+            songs={songs} />         
+        <SongDetails />                  
+         {/* {React.cloneElement(this.props.children, 'hi'}               */}
+         <Footer /> 
       </div>
     );
   }
