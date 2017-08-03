@@ -12,43 +12,42 @@ class App extends Component {
       isPlaying: false
 
     }
+    this.clickPrev = this.clickPrev.bind(this);
     this.onSongPlay = this.onSongPlay.bind(this);
     this.onSongPause = this.onSongPause.bind(this);
     this.clickNext = this.clickNext.bind(this);
-		this.clickPrev = this.clickPrev.bind(this);
   }
-
-    onSongPlay () {
-      let p = document.getElementById("controller");
-      console.log(p);
-      p.play();
+  	clickPrev() {
+		if (this.state.selectedSong > 0) {
+		  this.setState({selectedSong: this.state.selectedSong - 1} );
+		  } else {
+			this.setState({selectedSong: this.state.selectedSong, next: false});
+		  }
     }
+    onSongPlay (event) {
+      // this.setState({songSelected: event.target.value})
+      let p = document.getElementById("controller");
+          p.play();
+      this.setState({isPlaying: false})
 
+    }
     onSongPause (event) {
       let p = document.getElementById("controller");
       p.pause();
     }
-
-    clickNext() {
-      console.log('clicknext');
-      console.log(this.props.route.songs);
-      console.log(this.state.selectedSong);
-
+    clickNext(event) {
+      // this.setState({songSelected: event.target.value})
+      // console.log('clicknext this.props.route.songs', this.props.route.songs);
+      // console.log('clicknext this.state.selectedSong', this.state.selectedSong); 
 	   if (this.state.selectedSong < this.props.route.songs.length -1) {
 			this.setState({selectedSong: this.state.selectedSong + 1});
 	   } else {
 		   this.setState({selectedSong: this.state.selectedSong});
-	   }
+     }
+
   }
 	
-	clickPrev() {
-    console.log('clickPrev');
-		if (this.state.selectedSong > 0) {
-		  this.setState({selectedSong: this.state.selectedSong - 1} );
-		} else {
-			this.setState({selectedSong: this.state.selectedSong, next: false});
-		}
-  }
+
 
   render() {
     const songs = this.props.route.songs
@@ -72,5 +71,7 @@ class App extends Component {
     );
   }
 }
+
+
 
 export default App;

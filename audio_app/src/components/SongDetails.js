@@ -1,6 +1,14 @@
 import React, {Component} from 'react';
 
 class SongDetails extends Component {
+    componentWillMount () {
+        
+    }
+    componentDidMount() {
+        let p = document.getElementById("controller");
+        console.log(this.props.isPlaying);
+        if (this.props.isPlaying === true) {p.play()}
+        }
     render() {
       let songID = this.props.params.id;
         return (

@@ -31,9 +31,12 @@ class Song extends Component {
                  <div className="media-body">
                     <h3 className="media-heading">
                         <Link to={`/songs/${this.props.id}`} onClick={event => this.setState({selectedSong:this.props.id})}> {this.props.title} </Link> 
-                         <button id={this.props.id} type="button" className="btn btn-primary" onClick={event => console.log('song button{this.props.id} clicked')}><span className="glyphicon glyphicon-play glyphicon-align-left"></span></button> 
 
-                         {/* onClick={event =>this.setState({songSelected:this.props.source})}    */}
+                        <button type="button" className="btn btn-primary" value={this.props.id} onClick={this.props.onSongPlay} >
+                             <span className="glyphicon glyphicon-play glyphicon-align-left"></span>
+                        </button> 
+                            {/* onClick={this.props.onSongPlay}  */}
+                          {/* onClick={event =>this.setState({songSelected:this.props.source})}     */}
                     </h3>
                 </div> 
 
