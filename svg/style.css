@@ -4,9 +4,22 @@ svg {
     z-index: -1;
 }
 
-h1 {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+.logoText {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     display: inline-block;
     color: white;
-    font-size: 80px;
+    font-size: 35px;
+}
+ .dropdown-submenu {
+    position: relative;
+}
+
+.dropdown-submenu .dropdown-menu {
+    top: 0;
+    left: 100%;
+    margin-top: -1px;
+} 
+
+form {
+    margin-left: 10px;
 }
