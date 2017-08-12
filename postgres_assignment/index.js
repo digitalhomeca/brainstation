@@ -1,0 +1,204 @@
+const express = require('express'),
+    app = express(),
+    bodyParser = require ('body-parser');
+
+// parse application/x-www-form-urlencoded 
+app.use(bodyParser.urlencoded({ extended: false }))
+
+// parse application/json 
+app.use(bodyParser.json())
+
+// starts server and listens on port listed
+var port = process.env.port || 8080;
+app.listen(port, function() {
+    console.log(`Express Server is Running on ${port}`);
+    console.log("Press Ctrl-C to quit");
+});
+
+
+const knex = require('knex')({
+    client: 'pg',
+    connection: {
+        host : '127.0.0.1',
+        user: 'postgres',
+        password: 'bs4536',
+        database: 'autos',
+        charset : 'utf-8'
+    }
+})
+
+const bookshelf = require('bookshelf')(knex);
+
+// Cars has foreign key of Dealership ID
+const Car = bookshelf.Model.extend ({
+    tableName: 'cars',
+    dealer: function(){
+        return this.belongsTo(Dealer)
+    }
+})
+
+// one to many relationship. One artist, many songs
+const Dealer = bookshelf.Model.extend ({
+    tableName: 'dealers',
+    car: function (){
+        return this.hasMany(Car)
+    }
+})
+
+// create a new car and save it
+
+// const newCar = new Car({
+//     make: 'TX',
+//     model: 'Acura',
+//     year: '2012',
+//     dealer_id: '4'
+// })
+
+// newCar.save()
+//     .then(saved => {
+//         console.log(saved.attributes)
+//     });
+
+
+// get all cars
+
+// Car.fetchAll()
+//     .then (cars => {
+//         console.log(cars.models.map(car => car.attributes))
+//     })
+//     .catch (error => {
+//         console.log(error)
+//     })
+
+// get cars with a filter (e.g., year is 2017)
+
+// Car.where({year: 2017}) 
+//     .fetch ()
+//     .then(car=> {
+//         console.log(car.attributes);
+//     });
+
+// get a single car with id
+
+// Car.where({id: 20})
+//     .fetch({withRelated: 'dealer'})
+//     .then(results => {
+//         console.log(results.attributes);
+//         console.log(JSON.stringify(results.relations));
+//     });
+
+// update a single car with new attribute values
+
+// const updateData= {
+//     year: '2010'
+// };
+
+// new Car ({id:11})
+//     .save(updateData,{patch: true})
+//     .then(updated => {
+//         console.log(updated.attributes);
+//     });
+
+
+// get dealership of a single car
+
+// Dealer.where({id:2})
+//     .fetch({withRelated: 'car'})
+//     .then (dealer => {
+//         console.log(dealer)
+//     });
+
+// get all cars for a single dealership
+
+// Car.where({id:15})
+//     .fetch({withRelated: 'dealer'})
+//     .then (car => {
+//         console.log(car)
+//     });
+
+
+// Delete Car with ID of 21
+
+// new Car ({id:21})
+//     .destroy()
+//     .then(result => {
+//         console.log(result);
+//     });
+
+
+
+
+// Endpoints
+
+// GET: Retrieve all car objects
+
+app.get('/cars', (req,res) => {
+    Car.fetchAll()
+    .then (cars => {
+        res.json(cars.models.map(car => car.attributes))
+    })
+    .catch (error => {
+        res(error)
+    })
+});
+
+// GET: Retrieve all dealership objects
+
+app.get('/dealers', (req,res) => {
+    Dealer.fetchAll()
+    .then (dealers => {
+        res.json(dealers.models.map(dealer => dealer.attributes))
+    })
+    .catch (error => {
+        res(error)
+    })
+});
+
+// GET: Retrieve a single car object using id
+
+app.get('/cars/:id', (req,res) => {
+    Car.where({id: req.params.id})
+        .fetch({withRelated: 'dealer'})
+        .then(car => {
+            res.json(car);
+        });
+});
+
+// GET: Retrieve a single dealership object using id
+
+app.get('/dealers/:id', (req,res) => {
+    Dealer.where({id: req.params.id})
+        .fetch({withRelated: 'car'})
+        .then(dealer => {
+            res.json(dealer);
+        });
+});
+
+// POST: Save a single car object
+
+ app.post('/cars', (req,res) => {
+
+    const newCar = new Car({
+    make: req.body.make,
+    model: req.body.model,
+    year: req.body.year,
+    dealer_id: req.body.dealer_id
+})
+    newCar.save()
+        .then(saved => {
+            console.log('added');
+            res.send('success');
+        })
+});
+
+// PUT: Change attributes for a single car object
+
+// DELETE: Delete single car object
+
+
+// POST: Save a single dealership object
+
+// PUT: Change attributes for a single dealership object
+
+// DELETE: Delete single dealership object
+
