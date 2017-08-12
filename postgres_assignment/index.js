@@ -15,7 +15,7 @@ app.listen(port, function() {
     console.log("Press Ctrl-C to quit");
 });
 
-
+// knex required for migrations and models
 const knex = require('knex')({
     client: 'pg',
     connection: {
@@ -27,9 +27,13 @@ const knex = require('knex')({
     }
 })
 
+// bookshelf required to carry out CRUD operations
+
 const bookshelf = require('bookshelf')(knex);
 
-// Cars has foreign key of Dealership ID
+// models identify tables and any relationships.
+
+// Cars has foreign key of Dealership ID and BELONGS to dealer
 const Car = bookshelf.Model.extend ({
     tableName: 'cars',
     dealer: function(){
@@ -37,7 +41,7 @@ const Car = bookshelf.Model.extend ({
     }
 })
 
-// one to many relationship. One artist, many songs
+// one to many relationship. One dealer, many cars
 const Dealer = bookshelf.Model.extend ({
     tableName: 'dealers',
     car: function (){
