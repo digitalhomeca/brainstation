@@ -1,17 +1,18 @@
-const Dealership = require('../models/dealerships');
-const dealershipsToSeed = [
+const mongoose = require('mongoose');
+const Dealers = require('../models/Dealer');
+const dealersToSeed = [
     {make: 'Hyundai', city: 'Toronto', province: 'ON', postal_code: 'M4M 2E4', street: '21 Broadview Ave', reviews: []},
     {make: 'Hyundai', city: 'Thornhill', province: 'ON',  postal_code: 'L4J 1V8', street: '7200 Yonge St', reviews: []}    
 ] 
 
 module.exports = () => {
-    Dealership.find({}, (err, dealerships) => {
+    Dealers.find({}, (err, dealers) => {
         if (err) {
             console.log(err)
         } else {
-            if (dealerships.length === 0) {
-                Dealership.collection.insert(dealershipsToSeed, (err, dealerships) => {
-                    console.log(dealerships)
+            if (dealers.length === 0) {
+                Dealers.collection.insert(dealersToSeed, (err, dealers) => {
+                    console.log(dealers)
                 })
             }
         }

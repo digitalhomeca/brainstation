@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
-const Dealership = require('../models/dealerships');
-const Car = require('../models/cars');
+const Dealer = require('../models/Dealer');
+const Car = require('../models/Car');
 
 
 module.exports = () => {
@@ -8,17 +8,17 @@ module.exports = () => {
         if (err) {
             console.log(err);
         } else if (cars.length === 0) {
-            Dealership.find({}, (err, dealerships) => {
+            Dealer.find({}, (err, dealers) => {
                 if (err) {
                     console.log(err);
                 } else {
-                    if (dealerships.length < 2) {
+                    if (dealers.length < 2) {
                         console.log('No dealership to use for seeding cars');
                     } else {
                         const carsToSeed = [
-                            {make: 'Hyundai', model: 'Elantra', year: 2017, dealership_id: dealerships[0]._id},
-                            {make: 'Hyundai', model: 'Elantra', year: 2016, dealership_id: dealerships[0]._id},
-                            {make: 'Hyundai', model: 'Elantra', year: 2017, dealership_id: dealerships[1]._id}
+                            {make: 'Hyundai', model: 'Elantra', year: 2017, dealership_id: dealers[0]._id},
+                            {make: 'Hyundai', model: 'Elantra', year: 2016, dealership_id: dealers[0]._id},
+                            {make: 'Hyundai', model: 'Elantra', year: 2017, dealership_id: dealers[1]._id}
                         ];
                         Car.collection.insert(carsToSeed, (err, cars) => {
                             console.log(cars)
